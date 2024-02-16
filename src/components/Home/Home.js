@@ -266,7 +266,7 @@ class Home extends Component {
                   }
                   <p className="control">
                     <button className="button is-success" type="submit" disabled={this.state.isEnabled}>
-                      Login
+                      บันทึก
                     </button>
                   </p>
                 </div>
