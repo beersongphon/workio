@@ -1,4 +1,3 @@
-/* eslint-disable no-undef */
 import axios from 'axios';
 
 const USER_API_URL = "http://localhost:8000";

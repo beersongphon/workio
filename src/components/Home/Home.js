@@ -8,6 +8,7 @@ import React, { Component } from "react";
 // } from "react-router-dom";
 import Swal from 'sweetalert2';
 import ApiService from "./../../service/ApiService";
+// import moment from 'moment';
 
 class Home extends Component {
   constructor() {
@@ -27,9 +28,14 @@ class Home extends Component {
     // console.log(this.state);
     const today = new Date();
     this.state.workdate = this.formatDateWithLocale(today, { format: "YYYY-MM-DD" });
-    this.state.workin = today.getHours()? '0'+today.getHours() + ':' + today.getMinutes() + ":" + today.getSeconds() : today.getHours() + ':' + today.getMinutes() + ":" + today.getSeconds();
-    this.state.workout = today.getHours()? '0'+today.getHours() + ':' + today.getMinutes() + ":" + today.getSeconds() : today.getHours() + ':' + today.getMinutes() + ":" + today.getSeconds();
-    
+    this.state.workin = today.getHours().toString().padStart(2, '0') + ':' + today.getMinutes().toString().padStart(2, '0') + ":" + today.getSeconds().toString().padStart(2, '0');
+    this.state.workout = today.getHours().toString().padStart(2, '0') + ':' + today.getMinutes().toString().padStart(2, '0') + ":" + today.getSeconds().toString().padStart(2, '0');
+    // this.state.workin = moment(today).format('h:mm:ss');
+    // this.state.workout = moment(today).format('h:mm:ss');
+    // const hours = today.getHours().toString().padStart(2, '0');
+    // const minutes = today.getMinutes().toString().padStart(2, '0');
+    // const formattedTime = `${hours}:${minutes}`;
+
     // this.state.workin = today.getHours() + ':' + today.getMinutes() + ":" + today.getSeconds();
     // this.state.workout = today.getHours() + ':' + today.getMinutes() + ":" + today.getSeconds();
 
