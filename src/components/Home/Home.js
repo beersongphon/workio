@@ -188,8 +188,8 @@ class Home extends Component {
     ApiService.getWorkIOs(id, date).then((res) => {
       // console.log("Data: ", res);
       if (res.data.status === "ok") {
-        this.setState({ rowio: res.data.workio });
-        this.state.isEnabled = this.state.workin.length > 0 && res.data.workio.workout.length > 0;
+        this.setState({ rowio: res.data.workio, isEnabled: this.state.workin.length > 0 && res.data.workio.workout.length > 0 });
+        // this.state.isEnabled = this.state.workin.length > 0 && res.data.workio.workout.length > 0;
         // console.log(res.data.workio.workout.length);
       } else {
         this.setState({ status: res.data.status });

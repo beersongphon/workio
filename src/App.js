@@ -33,22 +33,22 @@ class App extends Component {
   render() {
     if (this.state.loggedIn === true) {
       return (
-        <Router>
+        <Router basename={'/workio'}>
           <Header name={this.state.appName} />
           <Routes name={this.state.appName} />
-        {/* <hr /> */}
-        {/* <Footer /> */}
-      </Router>
-      );
-      } else {
-        return (
-          <Router>
-            <Routes name={this.state.appName} />
           {/* <hr /> */}
           {/* <Footer /> */}
         </Router>
-        );
-      }
+      );
+    } else {
+      return (
+        <Router basename={'/workio'}>
+          <Routes name={this.state.appName} />
+          {/* <hr /> */}
+          {/* <Footer /> */}
+        </Router>
+      );
+    }
   }
 }
 

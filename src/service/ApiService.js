@@ -1,7 +1,5 @@
 import axios from 'axios';
 
-const USER_API_URL = "http://localhost:8000";
-
 class ApiService {
 
   // login(formValue){
@@ -15,7 +13,7 @@ class ApiService {
     //   'username': loginForm.username,
     //   'password': loginForm.password
     // };
-    return axios.post(`${USER_API_URL}/login`, loginForm, { headers: loginHeader });
+    return axios.post(`${process.env.REACT_APP_API_URL}/login`, loginForm, { headers: loginHeader });
   }
 
   getProfile() {
@@ -24,22 +22,23 @@ class ApiService {
     const header = {
       'Authorization': 'Bearer ' + token
     };
-    return axios.post(`${USER_API_URL}/authen`, { d: "" }, { headers: header });
+    return axios.post(`${process.env.REACT_APP_API_URL}/authen`, {}, { headers: header });
   }
 
   getRefresh() {
-    const token = JSON.parse(localStorage.getItem('token'));
+    // const token = JSON.parse(localStorage.getItem('token'));
+    const token = localStorage.getItem("refresh_token");
     const header = {
       'Authorization': 'Bearer ' + token.refresh_token
     };
-    return axios.post(`${USER_API_URL}/refresh`, { d: "" }, { headers: header });
+    return axios.post(`${process.env.REACT_APP_API_URL}/refresh`, {}, { headers: header });
   }
 
   getUsers(id) {
     let p = {
       id: id
     }
-    return axios.post(`${USER_API_URL}/user`, p);
+    return axios.post(`${process.env.REACT_APP_API_URL}/user`, p);
   }
 
   getWorkIOs(id, title) {
@@ -47,17 +46,17 @@ class ApiService {
     //   id: id,
     //   title: title
     // }
-    return axios.get(`${USER_API_URL}/workio/${id}/${title}`);
+    return axios.get(`${process.env.REACT_APP_API_URL}/workio/${id}/${title}`);
   }
 
   insertWorkIO(formValue) {
     const apiHeader = { 'Content-Type': 'application/json' };
-    return axios.post(`${USER_API_URL}/workio/save`, formValue, { headers: apiHeader });
+    return axios.post(`${process.env.REACT_APP_API_URL}/workio/save`, formValue, { headers: apiHeader });
   }
 
   updateWorkIO(formValue) {
     const apiHeader = { 'Content-Type': 'application/json' };
-    return axios.put(`${USER_API_URL}/workio/update`, formValue, { headers: apiHeader });
+    return axios.put(`${process.env.REACT_APP_API_URL}/workio/update`, formValue, { headers: apiHeader });
   }
 
 
@@ -81,4 +80,5 @@ class ApiService {
   }
 }
 
+// eslint-disable-next-line
 export default new ApiService();
