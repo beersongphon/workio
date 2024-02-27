@@ -1,5 +1,13 @@
 import axios from 'axios';
+import TokenService from "./../service/TokenService";
+import jwtInterceptor from "./../service/SetupInterceptors";
 
+const instance = axios.create({
+  baseURL: "http://localhost:8000/",
+  headers: {
+    "Content-Type": "application/json",
+  },
+});
 class ApiService {
 
   // login(formValue){
@@ -13,21 +21,28 @@ class ApiService {
     //   'username': loginForm.username,
     //   'password': loginForm.password
     // };
+    // return instance.post(`${process.env.REACT_APP_API_URL}/login`, loginForm, { headers: loginHeader });
     return axios.post(`${process.env.REACT_APP_API_URL}/login`, loginForm, { headers: loginHeader });
   }
 
+  // getProfile() {
+  //   // const token = TokenService.getToken();
+  //   // const token = JSON.parse(localStorage.getItem('token'));
+  //   const token = localStorage.getItem("access_token");
+  //   const header = {
+  //     'Authorization': 'Bearer ' + token
+  //   };
+  //   return instance.post(`${process.env.REACT_APP_API_URL}/authen`, {}, { headers: header });
+  // }
+
   getProfile() {
-    // const token = JSON.parse(localStorage.getItem('token'));
-    const token = localStorage.getItem("access_token");
-    const header = {
-      'Authorization': 'Bearer ' + token
-    };
-    return axios.post(`${process.env.REACT_APP_API_URL}/authen`, {}, { headers: header });
+    return jwtInterceptor.post(`${process.env.REACT_APP_API_URL}/authen`, {});
   }
 
   getRefresh() {
+    const token = TokenService.getToken();
     // const token = JSON.parse(localStorage.getItem('token'));
-    const token = localStorage.getItem("refresh_token");
+    // const token = localStorage.getItem("refresh_token");
     const header = {
       'Authorization': 'Bearer ' + token.refresh_token
     };
